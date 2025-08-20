@@ -11,16 +11,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Style for completed tasks */
+    
         .completed {
             text-decoration: line-through;
             color: #888;
         }
-        /* Simple transition for list items */
         li {
             transition: background-color 0.2s ease-in-out;
         }
@@ -59,10 +57,9 @@
     </div>
 
     <script>
-        // Wait for the DOM to be fully loaded before running the script
+    
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Get references to the essential HTML elements
             const taskInput = document.getElementById('taskInput');
             const addTaskBtn = document.getElementById('addTaskBtn');
             const taskList = document.getElementById('taskList');
@@ -80,55 +77,53 @@
                     return; 
                 }
 
-                // Create the list item element
+            
                 const li = document.createElement('li');
                 li.className = 'flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600';
 
-                // Create the span to hold the task text
+                
                 const taskSpan = document.createElement('span');
                 taskSpan.textContent = text;
                 taskSpan.className = 'text-gray-800 dark:text-gray-200';
                 
-                // Create the delete button
+                
                 const deleteBtn = document.createElement('button');
                 deleteBtn.innerHTML = '&#x2715;'; // Cross mark
                 deleteBtn.className = 'delete-btn text-red-500 hover:text-red-700 font-bold transition-colors';
 
-                // Append the text and button to the list item
+                
                 li.appendChild(taskSpan);
                 li.appendChild(deleteBtn);
 
-                // Add the new list item to the task list
+                
                 taskList.appendChild(li);
 
-                // Clear the input field for the next task
+                
                 taskInput.value = '';
                 taskInput.focus(); // Set focus back to the input field
             }
 
             // --- Event Listeners ---
 
-            // 1. Add task when the "Add" button is clicked
+            
             addTaskBtn.addEventListener('click', () => {
                 addTask(taskInput.value);
             });
 
-            // 2. Add task when the "Enter" key is pressed in the input field
+            
             taskInput.addEventListener('keypress', (event) => {
                 if (event.key === 'Enter') {
                     addTask(taskInput.value);
                 }
             });
 
-            // 3. Handle clicks on the task list for completing or deleting tasks
-            // This uses event delegation to efficiently handle events on all list items
+    
             taskList.addEventListener('click', (event) => {
                 const target = event.target;
                 
-                // Check if a delete button was clicked
                 if (target.classList.contains('delete-btn')) {
                     const listItem = target.parentElement;
-                    // Animate out before removing
+                    
                     listItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                     listItem.style.opacity = '0';
                     listItem.style.transform = 'translateX(20px)';
@@ -136,7 +131,7 @@
                         listItem.remove();
                     }, 300);
                 } 
-                // Check if a list item (or its text) was clicked
+                
                 else if (target.tagName === 'LI' || target.tagName === 'SPAN') {
                     const listItem = target.closest('li');
                     listItem.querySelector('span').classList.toggle('completed');
