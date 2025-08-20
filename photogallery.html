@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        #lightbox {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .gallery-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white text-center">My Photo Gallery</h1>
+            <p class="text-center text-gray-600 dark:text-gray-300 mt-2">A collection of beautiful moments</p>
+        </div>
+    </header>
+
+    <!-- Main Content: Gallery Grid -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+            <!-- You can repeat this block for each image -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/3498db/ffffff?text=Nature" alt="A beautiful nature scene" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/e74c3c/ffffff?text=Cityscape" alt="A bustling cityscape at night" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/2ecc71/ffffff?text=Wildlife" alt="A majestic lion in the savanna" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/9b59b6/ffffff?text=Architecture" alt="Modern architectural design" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/f1c40f/ffffff?text=Travel" alt="A serene beach in the tropics" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/1abc9c/ffffff?text=Food" alt="A delicious and colorful dish" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/e67e22/ffffff?text=Technology" alt="A close-up of a circuit board" class="w-full h-full object-cover gallery-image">
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer">
+                <img src="https://placehold.co/600x400/34495e/ffffff?text=Portrait" alt="A striking black and white portrait" class="w-full h-full object-cover gallery-image">
+            </div>
+            <!-- End of image block -->
+
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="relative bg-white dark:bg-gray-800 p-4 rounded-lg max-w-4xl max-h-full">
+            <!-- Close Button -->
+            <button id="close-lightbox" class="absolute -top-4 -right-4 bg-red-500 text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold focus:outline-none">&times;</button>
+            
+            <!-- Image and Caption -->
+            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[80vh] rounded-md">
+            <p id="lightbox-caption" class="text-center text-gray-700 dark:text-gray-200 mt-4"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 mt-12">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+            
+        </div>
+    </footer>
+
+    <script>
+        
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeLightbox = document.getElementById('close-lightbox');
+
+        
+        function openLightbox(event) {
+            const imgElement = event.target;
+            lightboxImage.src = imgElement.src;
+            lightboxCaption.textContent = imgElement.alt;
+            lightbox.classList.remove('hidden');
+        }
+
+    
+        function closeTheLightbox() {
+            lightbox.classList.add('hidden');
+        }
+
+        
+        galleryImages.forEach(image => {
+            image.addEventListener('click', openLightbox);
+        });
+
+        
+        closeLightbox.addEventListener('click', closeTheLightbox);
+
+        
+        lightbox.addEventListener('click', (e) => {
+            
+            if (e.target === lightbox) {
+                closeTheLightbox();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
