@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Tables Comparison</title>
+</head>
+<body style="font-family: Arial; text-align: center;">
+
+  <h2>Random Two Tables & Even-Odd Separation</h2>
+  <button onclick="generateTables()">Generate Tables</button>
+
+  <h3 id="num1"></h3>
+  <h3 id="num2"></h3>
+
+  <p id="table1"></p>
+  <p id="table2"></p>
+
+  <h3>Even Numbers</h3>
+  <p id="evenList"></p>
+
+  <h3>Odd Numbers</h3>
+  <p id="oddList"></p>
+
+  <script>
+    function generateTables() {
+      // Generate random numbers between 1 and 10
+      let num1 = Math.floor(Math.random() * 10) + 1;
+      let num2 = Math.floor(Math.random() * 10) + 1;
+
+      // Show numbers in HTML
+      document.getElementById("num1").innerText = "First Number: " + num1;
+      document.getElementById("num2").innerText = "Second Number: " + num2;
+
+      let table1 = [];
+      let table2 = [];
+
+      // Create multiplication tables
+      for (let i = 1; i <= 10; i++) {
+        table1.push(num1 * i);
+        table2.push(num2 * i);
+      }
+
+      document.getElementById("table1").innerText = "Table of " + num1 + ": " + table1.join(", ");
+      document.getElementById("table2").innerText = "Table of " + num2 + ": " + table2.join(", ");
+
+      // Merge both tables
+      let combined = [...table1, ...table2];
+
+      // Separate even and odd numbers
+      let evenList = [];
+      let oddList = [];
+
+      for (let value of combined) {
+        if (value % 2 === 0) {
+          evenList.push(value);
+        } else {
+          oddList.push(value);
+        }
+      }
+
+      // Show results
+      document.getElementById("evenList").innerText = evenList.join(", ");
+      document.getElementById("oddList").innerText = oddList.join(", ");
+    }
+  </script>
+
+</body>
+</html>
