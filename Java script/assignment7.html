@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Information</title>
+    <style>
+        html,body{
+            background-color: azure;
+        }
+        .box {
+            border: 2px solid #333;
+            padding: 15px;
+            margin: 20px auto;
+            width: 350px;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .student {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .container {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box" id="sameBranchBox">
+      <h2>Same branch student</h2>
+  </div>
+
+  <div class="box" id="otherBranchBox">
+      <h2>Other Branch Students</h2>
+  </div>
+</div>
+
+<script>
+    const students = [
+        {name:"Chandrapraksh", rollno:"9003", branch:"it"},
+        {name:"Sachin", rollno:"9004", branch:"it"},
+        {name:"Abhijeet", rollno:"9005", branch:"it"},
+        {name:"Himashu", rollno:"9002", branch:"ce"},
+        {name:"Aman", rollno:"9001", branch:"cse"}
+    ];
+
+    const sameBranchBox = document.getElementById('sameBranchBox');
+    const otherBranchBox = document.getElementById('otherBranchBox');
+
+    students.forEach(student => {
+        const div = document.createElement('div');
+        div.classList.add('student');
+        div.innerHTML = `
+            <strong>Name:</strong> ${student.name} <br/>
+            <strong>Roll No:</strong> ${student.rollno} <br/>
+            <strong>Branch:</strong> ${student.branch}
+        `;
+
+        if(student.branch === "it") {
+            sameBranchBox.appendChild(div);
+        } else {
+            otherBranchBox.appendChild(div);
+        }
+    });
+</script>
+
+</body>
+</html>
